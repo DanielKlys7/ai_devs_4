@@ -1,26 +1,30 @@
 import dotenv from 'dotenv';
-
-import { taggedPeopleSchema } from './schemas/taggedPeople';
-import { callAI } from './tools/callAI';
 import { ResponseInput } from 'openai/resources/responses/responses.mjs';
 
+import { loadPrompt } from './helpers/loadPrompt';
+import { callAI } from './tools/callAI';
 import { toolsDescriptions, tools } from './tools';
 
 dotenv.config();
 
 const init = async () => {
+  const prompt = await loadPrompt('agent.md');
+
   const messages: ResponseInput = [
     {
       role: 'system',
-      content:
-        'Jesteś moim agentem odpowiedzialnym za rozwiązywanie zadań z kursu AI Devs. Będę Ci dostarczać zadania, a Ty będziesz je rozwiązywać, korzystając z dostępnych narzędzi. Pamiętaj, że nie musisz używać do wszystkiego AI, co się da ogarnij za pomocą kodu. Nie wrzucaj całej treści .csv do AI. Dziś zależy nam na zadaniu z tasks/01. Zawsze musisz wykonać akcję sendResponse w odpowiednim formacie - dopiero po nim możesz zakończyć. Oto lista narzędzi, które masz do dyspozycji:',
+      content: prompt.text,
     },
+    { role: 'user', content: 'Start with tasks/01' },
   ];
 
   while (true) {
     const response = await callAI({
       messages,
       tools: toolsDescriptions,
+      model: prompt.model,
+      temperature: prompt.temperature,
+      max_tokens: prompt.max_tokens,
     });
 
     messages.push(...(response.output as any[]));

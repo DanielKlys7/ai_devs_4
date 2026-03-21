@@ -1,14 +1,25 @@
-import fs from "fs";
+import fs from 'fs';
 
-export const downloadFile = async (
-  url: string,
-  saveAt: string,
-): Promise<Blob> => {
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+export const downloadFile = async ({
+  url,
+  saveAt,
+}: {
+  url: string;
+  saveAt: string;
+}): Promise<Blob> => {
+  const fileUrl = url.includes('{{api_key}}')
+    ? url.replace('{{api_key}}', process.env.AI_DEVS_API_KEY || '')
+    : url;
+
   try {
-    const response = await fetch(url);
+    const response = await fetch(fileUrl);
     if (!response.ok) {
       throw new Error(
-        `Failed to download file: ${response.status} ${response.statusText}`,
+        `Failed to download file: ${response.status} ${response.statusText}`
       );
     }
     const blob = await response.blob();

@@ -1,4 +1,5 @@
 import { calculateAge } from './calculateAge';
+import { downloadFile } from './downloadFile';
 import { filter } from './filter';
 import { getFolderStructure } from './getFolderStructure';
 import { parseCSV } from './parseCSV';
@@ -14,6 +15,7 @@ export const tools: Record<string, any> = {
   queryCSV,
   filter,
   calculateAge,
+  downloadFile,
   sendResponse,
   readFile,
   finish: ({ answer }: { answer: string }) => answer,
@@ -178,6 +180,32 @@ export const toolsDescriptions = [
           description: 'A few example rows to understand the data format.',
         },
       },
+    },
+  },
+  {
+    type: 'function',
+    name: 'downloadFile',
+    description:
+      'Download a file from a URL and save it to the local filesystem. Supports {{api_key}} placeholder in the URL, which is automatically replaced with the AI_DEVS_API_KEY environment variable.',
+    parameters: {
+      type: 'object',
+      properties: {
+        url: {
+          type: 'string',
+          description:
+            'The URL to download from. Use {{api_key}} as a placeholder if the key should be injected.',
+        },
+        saveAt: {
+          type: 'string',
+          description:
+            'Local file path where the downloaded file will be saved.',
+        },
+      },
+      required: ['url', 'saveAt'],
+    },
+    returns: {
+      type: 'object',
+      description: 'The downloaded file as a Blob.',
     },
   },
   {

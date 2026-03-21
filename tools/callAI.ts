@@ -13,14 +13,22 @@ export const callAI = async ({
   messages,
   format,
   tools = [],
+  model = 'gpt-5.4-nano',
+  temperature = 0.3,
+  max_tokens = 2000,
 }: {
   messages: ResponseInput;
   format?: z.ZodObject<any>;
   tools?: any[];
+  model?: string;
+  temperature?: number;
+  max_tokens?: number;
 }) => {
   const response = await openai.responses.create({
-    model: 'gpt-5.4-mini',
+    model,
     input: messages,
+    temperature,
+    max_output_tokens: max_tokens,
     text: format
       ? {
           format: zodTextFormat(format, 'format'),
