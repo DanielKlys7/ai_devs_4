@@ -11,7 +11,7 @@ export async function loadPrompt(filename: string) {
     name: meta.name as string,
     version: (meta.version ?? '1.0') as string,
     tags: (meta.tags ?? []) as string[],
-    model: (meta.model ?? 'gpt-4o-mini') as string,
+    model: (meta.model ?? 'gpt-5.4-mini') as string,
     temperature: (meta.temperature ?? 0.3) as number,
     max_tokens: (meta.max_tokens ?? 2000) as number,
     timeout_ms: (meta.timeout_ms ?? 60000) as number,

@@ -8,9 +8,8 @@ const readFile = async ({
   try {
     const data = await fs.readFile(filePath, 'utf-8');
     return data;
-  } catch (error) {
-    console.error('Error reading file:', error);
-    throw error;
+  } catch (error: any) {
+    return `ERROR: ${error.code === 'ENOENT' ? `File not found: ${filePath}` : error.message}`;
   }
 };
 

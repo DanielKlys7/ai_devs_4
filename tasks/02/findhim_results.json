@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Cezary",
+    "surname": "Żurek",
+    "born": 1987,
+    "accessLevel": 1,
+    "powerPlant": {"city": "Zabrze", "code": "PWR3847PL", "distanceKm": 0.86}
+  },
+  {
+    "name": "Jacek",
+    "surname": "Nowak",
+    "born": 1991,
+    "accessLevel": 1,
+    "powerPlant": {"city": "Zabrze", "code": "PWR3847PL", "distanceKm": 9.69}
+  },
+  {
+    "name": "Oskar",
+    "surname": "Sieradzki",
+    "born": 1993,
+    "accessLevel": 7,
+    "powerPlant": {"city": "Tczew", "code": "PWR1593PL", "distanceKm": 9.29}
+  },
+  {
+    "name": "Wojciech",
+    "surname": "Bielik",
+    "born": 1986,
+    "accessLevel": 7,
+    "powerPlant": {"city": "Chelmno", "code": "PWR2758PL", "distanceKm": 1.71}
+  },
+  {
+    "name": "Wacław",
+    "surname": "Jasiński",
+    "born": 1986,
+    "accessLevel": 2,
+    "powerPlant": {"city": "Radom", "code": "PWR8406PL", "distanceKm": 13.63}
+  }
+]

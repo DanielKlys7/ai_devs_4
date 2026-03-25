@@ -1,8 +1,6 @@
 import fs from 'fs';
 
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { env } from '../config/env';
 
 export const downloadFile = async ({
   url,
@@ -12,7 +10,7 @@ export const downloadFile = async ({
   saveAt: string;
 }): Promise<Blob> => {
   const fileUrl = url.includes('{{api_key}}')
-    ? url.replace('{{api_key}}', process.env.AI_DEVS_API_KEY || '')
+    ? url.replace('{{api_key}}', env.AI_DEVS_API_KEY)
     : url;
 
   try {
